@@ -5,6 +5,11 @@ import folium
 from folium.plugins import HeatMap
 #python -m streamlit run huff/huff.py
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "shops.csv")
+shops = pd.read_csv(csv_path)
+print(shops)
+
 st.title("광주 복합쇼핑몰 입지에 따른 인구 유입 시뮬레이션")
 
 def huff_probability(area, distance, alpha=1, beta=2):
@@ -23,9 +28,6 @@ def choice_probability(areas, distances):
 def distance(x1, y1, x2, y2):
     return np.sqrt((x1-x2)**2 + (y1-y2)**2)
 
-
-shops = pd.read_csv("huff\shops.csv")
-print(shops)
 
 
 def simulate(mall_area,x,y,population=10000):
